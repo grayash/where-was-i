@@ -9,6 +9,11 @@
 <meta property="og:description" content="올해 다녀온 곳을 한 장의 지도로 모아봤어요.">
 <meta property="og:type" content="website">
 <title>나 어디 갔었더라</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XL6L6SC9S0"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-XL6L6SC9S0',{allow_google_signals:false,allow_ad_personalization_signals:false});
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -433,7 +438,7 @@ function load(raw, sample){
   try{
     const d=build(parse(raw));
     if (!d.legs.some(l=>!l.home)) throw new Error('집과 회사 말고 10분 넘게 머문 곳이 아직 없어요.');
-    isSample=sample; $('err').hidden=true;
+    isSample=sample; $('err').hidden=true; if(!sample) ev('map_shown');
     $('intro').hidden=true; $('result').hidden=false;
     prepare(d);
     const out=d.legs.filter(l=>!l.home);
@@ -444,7 +449,8 @@ function load(raw, sample){
     resize(); setOverview(); draw();
   }catch(e){ $('err').textContent=e.message||'파일을 읽지 못했어요.'; $('err').hidden=false; $('result').hidden=true; $('intro').hidden=false; }
 }
-$('pick').onclick=()=>$('file').click();
+const ev=n=>{ try{ gtag('event',n); }catch(_){} };
+$('pick').onclick=()=>{ ev('pick_file'); $('file').click(); };
 $('file').onchange=e=>{
   const f=e.target.files[0]; if(!f) return; $('pick').textContent='읽는 중…';
   const r=new FileReader();
@@ -452,7 +458,7 @@ $('file').onchange=e=>{
   r.onerror=()=>{ $('pick').textContent='내 타임라인 파일 고르기'; $('err').textContent='파일을 열지 못했어요. 다시 골라 주세요.'; $('err').hidden=false; };
   r.readAsText(f);
 };
-$('demo').onclick=()=>load(makeSample(),true);
+$('demo').onclick=()=>{ ev('view_sample'); load(makeSample(),true); };
 $('back').onclick=()=>{ closeSheet(); $('result').hidden=true; $('intro').hidden=false; };
 
 /* ---------- 예시 데이터 (가상의 사람) ---------- */

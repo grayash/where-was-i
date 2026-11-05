@@ -4,10 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#10141d">
-<meta name="description" content="구글 타임라인 파일로 올해 다녀온 곳을 한 장의 지도로 모아봐요. 파일은 내 폰 밖으로 나가지 않아요.">
-<meta property="og:title" content="나 어디 갔었더라">
-<meta property="og:description" content="올해 다녀온 곳을 한 장의 지도로 모아봤어요.">
+<meta name="description" content="구글 타임라인 파일로 올해 다녀온 곳을 한 장의 지도로 모아봐요. 가는 길, 돌아오는 길, 머문 시간까지. 파일은 내 폰 밖으로 나가지 않아요.">
+<link rel="canonical" href="https://grayash.github.io/where-was-i/">
+<meta property="og:site_name" content="나 어디 갔었더라">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://grayash.github.io/where-was-i/">
+<meta property="og:title" content="나 어디 갔었더라 · 올해 다녀온 곳 지도">
+<meta property="og:description" content="구글 타임라인 파일 하나로 올해 다녀온 곳과 머문 시간을 지도 한 장에. 파일은 내 폰 안에서만 읽어요.">
+<meta property="og:image" content="https://grayash.github.io/where-was-i/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="나 어디 갔었더라 — 올해 다녀온 곳을 모은 지도 화면">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="나 어디 갔었더라 · 올해 다녀온 곳 지도">
+<meta name="twitter:description" content="구글 타임라인 파일 하나로 올해 다녀온 곳과 머문 시간을 지도 한 장에.">
+<meta name="twitter:image" content="https://grayash.github.io/where-was-i/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 28'%3E%3Cpath d='M11 1C5.5 1 1 5.3 1 10.7 1 17.6 11 27 11 27s10-9.4 10-16.3C21 5.3 16.5 1 11 1z' fill='%23ffb648'/%3E%3Ccircle cx='11' cy='10.5' r='4' fill='%2310141d'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon-180.png">
 <title>나 어디 갔었더라</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL6L6SC9S0"></script>
 <script>
@@ -107,6 +121,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
 </style>
 </head>
 <body>
+<noscript><p style="padding:24px;color:#eef0f4">이 페이지는 자바스크립트가 켜져 있어야 지도를 만들 수 있어요.</p></noscript>
 <canvas id="map" aria-hidden="true"></canvas>
 
 <section class="screen" id="intro">
@@ -137,6 +152,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
     <div class="actions">
       <button class="btn" id="pick">내 타임라인 파일 고르기</button>
       <button class="btn ghost" id="demo">예시로 먼저 보기</button>
+      <button class="btn ghost" id="share">친구에게 알려주기</button>
       <p class="err" id="err" hidden></p>
     </div>
     <p class="lock"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>파일은 이 휴대폰 안에서만 읽어요. 주소도 페이지에 들어 있는 전국 행정동 지도로 찾아서, 어디에도 보내지 않아요.</p>
@@ -458,6 +474,8 @@ $('file').onchange=e=>{
   r.onerror=()=>{ $('pick').textContent='내 타임라인 파일 고르기'; $('err').textContent='파일을 열지 못했어요. 다시 골라 주세요.'; $('err').hidden=false; };
   r.readAsText(f);
 };
+$('share').onclick=async()=>{ ev('share'); const d={title:'나 어디 갔었더라',text:'올해 다녀온 곳을 지도 한 장으로 모아봤어요. 파일은 내 폰 안에서만 읽어요.',url:location.href.split('#')[0]};
+  try{ if(navigator.share){ await navigator.share(d); return; } await navigator.clipboard.writeText(d.url); $('share').textContent='링크를 복사했어요'; setTimeout(()=>$('share').textContent='친구에게 알려주기',2000); }catch(_){} };
 $('demo').onclick=()=>{ ev('view_sample'); load(makeSample(),true); };
 $('back').onclick=()=>{ closeSheet(); $('result').hidden=true; $('intro').hidden=false; };
 

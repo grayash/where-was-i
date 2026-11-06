@@ -44,7 +44,9 @@ gtag('js',new Date());gtag('config','G-XL6L6SC9S0',{allow_google_signals:false,a
   color-scheme:dark;
 }
 html,body{height:100%}
-body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.6;overflow:hidden}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:16px;line-height:1.6;overflow:hidden;word-break:keep-all;overflow-wrap:break-word;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+p,li{text-wrap:pretty}h1,h2,h3{text-wrap:balance}
+.fb{text-align:center;margin:0}.fb a{display:inline-block;padding:8px 6px;color:var(--muted);font-size:14px;text-underline-offset:3px}
 canvas#map{position:fixed;left:0;top:0;width:100%;height:100%;display:block;touch-action:none}
 .screen{position:fixed;inset:0;overflow-y:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(env(safe-area-inset-top,0px) + 24px) calc(env(safe-area-inset-bottom,0px) + 24px);display:flex;flex-direction:column;align-items:center}
 .col{width:100%;max-width:440px;display:flex;flex-direction:column;gap:20px}
@@ -55,7 +57,7 @@ h2{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.35;ma
 h2 span{color:var(--lamp)}
 .lead{font-size:17px}
 .muted{color:var(--muted);font-size:15px}
-.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--lamp);font-weight:600}
+.eyebrow{font-size:14px;letter-spacing:.08em;color:var(--lamp);font-weight:600}
 .card{background:color-mix(in srgb,var(--ink-2) 94%,transparent);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
 .steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;font-size:15px}
 .steps b{color:var(--paper);font-weight:600}
@@ -68,7 +70,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
 .lock{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
 .lock svg{flex:none;margin-top:3px}
 .err{color:#ff8f7a;font-size:15px}
-.sample{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.06em;color:#1b1408;background:var(--home);border-radius:6px;padding:2px 8px;align-self:flex-start}
+.sample{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.06em;color:#1b1408;background:var(--home);border-radius:6px;padding:2px 8px;align-self:flex-start}
 #intro{background:var(--ink)}
 #intro .col{margin-block:auto;gap:28px}
 .hero{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
@@ -81,7 +83,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
 #intro .steps{font-size:16px;gap:8px;word-break:keep-all}
 #intro .tab{font-size:16px;min-height:46px}
 .actions{display:flex;flex-direction:column;gap:10px}
-#intro .lock{justify-content:center;text-align:left;font-size:13px;line-height:1.55;word-break:keep-all;max-width:24em;margin-inline:auto}
+#intro .lock{justify-content:center;text-align:left;font-size:15px;line-height:1.55;word-break:keep-all;max-width:24em;margin-inline:auto}
 #intro .err{text-align:center}
 #found .col{margin-top:auto}
 
@@ -93,7 +95,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
 .rtitle{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.25}
 .rtitle span{color:var(--lamp)}
 .rper{font-size:14px;color:var(--muted)}
-.legend{font-size:13px;color:var(--muted);display:flex;gap:12px;margin-top:4px}
+.legend{font-size:14px;color:var(--muted);display:flex;gap:12px;margin-top:4px}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:3px;margin-right:5px}
 .rbtns{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 .chip{font:inherit;font-size:14px;padding:8px 14px;min-height:40px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 86%,transparent);color:var(--paper);cursor:pointer;white-space:nowrap}
@@ -107,16 +109,16 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
 .gmap .ic{flex:none;width:38px;height:38px;border-radius:11px;background:#fff;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .gmap .tx{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
 .gmap .tx b{font-size:16px;font-weight:600}
-.gmap .tx span{font-size:13px;color:var(--muted)}
+.gmap .tx span{font-size:14px;color:var(--muted)}
 .gmap .go{flex:none;color:var(--lamp)}
 .gmap:active{transform:scale(.99)}
 .gmap:focus-visible{outline:3px solid var(--home);outline-offset:2px}
-.credit{position:absolute;left:max(10px,env(safe-area-inset-left,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 4px);font-size:10px;color:var(--muted);opacity:.7}
+.credit{position:absolute;left:max(10px,env(safe-area-inset-left,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 4px);font-size:12px;color:var(--muted);opacity:.8}
 .credit a{color:inherit}
 #sList{list-style:none;margin:0;padding:0;overflow-y:auto}
 #sList li{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
 #sList .d{font-weight:600;font-size:16px}
-#sList .d small{font-weight:400;color:var(--muted);font-size:13px;margin-left:2px}
+#sList .d small{font-weight:400;color:var(--muted);font-size:14px;margin-left:2px}
 #sList .t{grid-column:1;font-family:var(--mono);font-size:15px;color:var(--paper)}
 #sList .m{grid-column:2;grid-row:1/3;align-self:center;font-size:14px;color:var(--muted)}
 </style>
@@ -156,7 +158,8 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
       <button class="btn ghost" id="share">친구에게 알려주기</button>
       <p class="err" id="err" hidden></p>
     </div>
-    <p class="lock"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>파일은 이 휴대폰 안에서만 읽어요. 주소도 페이지에 들어 있는 전국 행정동 지도로 찾아서, 어디에도 보내지 않아요.</p>
+    <p class="lock"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>파일은 이 휴대폰 안에서만 읽어요. 주소도 페이지에 들어 있는 전국 행정동 지도로 찾아서, 어디에도 보내지 않아요. 방문 통계만 익명으로 집계해요.</p>
+    <p class="fb"><a href="https://github.com/grayash/where-was-i/issues/new?title=%EC%9D%98%EA%B2%AC%3A%20" target="_blank" rel="noopener">의견 보내기</a></p>
   </div>
 </section>
 

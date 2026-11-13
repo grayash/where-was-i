@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://grayash.github.io/where-was-i/sitemap.xml

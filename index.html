@@ -99,6 +99,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
 .legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:3px;margin-right:5px}
 .rbtns{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 .chip{font:inherit;font-size:14px;padding:8px 14px;min-height:40px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 86%,transparent);color:var(--paper);cursor:pointer;white-space:nowrap}
+#shareFab{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:calc(var(--rh,120px) + 12px);font:inherit;font-size:15px;min-height:44px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 86%,transparent);color:var(--paper);cursor:pointer;white-space:nowrap}
 #hint{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);font-size:14px;color:var(--paper);background:color-mix(in srgb,var(--ink) 88%,transparent);border:1px solid var(--line);border-radius:999px;padding:8px 16px;white-space:nowrap}
 #sheet{position:absolute;left:0;right:0;bottom:0;max-height:46vh;display:flex;flex-direction:column;background:var(--ink-2);border-top:1px solid var(--line);border-radius:18px 18px 0 0;padding-top:14px;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 8px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-shadow:0 -10px 30px rgba(0,0,0,.4)}
 .shead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
@@ -177,6 +178,7 @@ button:focus-visible{outline:3px solid var(--home);outline-offset:2px}
     </div>
   </div>
   <p class="credit">행정동 경계: 통계청 SGIS · <a href="https://github.com/vuski/admdongkor" target="_blank" rel="noopener">vuski/admdongkor</a> (CC BY 4.0)</p>
+  <button id="shareFab" type="button">친구에게 알려주기</button>
   <p id="hint">두 손가락으로 확대하고, 점을 눌러 보세요</p>
   <div id="sheet" hidden role="dialog" aria-labelledby="sTitle">
     <div class="shead">
@@ -318,7 +320,7 @@ const rtop=document.querySelector('.rtop');
 let FONT='';
 function resize(){
   const top=$('result').hidden?0:Math.ceil(rtop.getBoundingClientRect().height);
-  cv.style.top=top+'px'; cv.style.height=`calc(100% - ${top}px)`;
+  document.documentElement.style.setProperty('--rh',top+'px'); cv.style.top=top+'px'; cv.style.height=`calc(100% - ${top}px)`;
   DPR=Math.min(2,devicePixelRatio||1); W=cv.clientWidth; Hh=cv.clientHeight; cv.width=W*DPR; cv.height=Hh*DPR;
   FONT=getComputedStyle(document.body).fontFamily;
   if(S) draw();
@@ -478,8 +480,11 @@ $('file').onchange=e=>{
   r.onerror=()=>{ $('pick').textContent='내 타임라인 파일 고르기'; $('err').textContent='파일을 열지 못했어요. 다시 골라 주세요.'; $('err').hidden=false; };
   r.readAsText(f);
 };
-$('share').onclick=async()=>{ ev('share'); const d={title:'나 어디 갔었더라',text:'올해 다녀온 곳을 지도 한 장으로 모아봤어요. 파일은 내 폰 안에서만 읽어요.',url:location.href.split('#')[0]};
-  try{ if(navigator.share){ await navigator.share(d); return; } await navigator.clipboard.writeText(d.url); $('share').textContent='링크를 복사했어요'; setTimeout(()=>$('share').textContent='친구에게 알려주기',2000); }catch(_){} };
+const doShare=async(btn)=>{ ev('share'); const d={title:'나 어디 갔었더라',text:'올해 다녀온 곳을 지도 한 장으로 모아봤어요. 파일은 내 폰 안에서만 읽어요.',url:'https://grayash.github.io/where-was-i/'};
+  const old=btn.textContent;
+  try{ if(navigator.share){ await navigator.share(d); return; } await navigator.clipboard.writeText(d.url); btn.textContent='링크를 복사했어요'; setTimeout(()=>btn.textContent=old,2000); }catch(_){} };
+$('share').onclick=()=>doShare($('share'));
+$('shareFab').onclick=()=>doShare($('shareFab'));
 $('demo').onclick=()=>{ ev('view_sample'); load(makeSample(),true); };
 $('back').onclick=()=>{ closeSheet(); $('result').hidden=true; $('intro').hidden=false; };
 
